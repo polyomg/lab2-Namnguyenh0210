@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 750px;
+            margin: 20px auto;
+            padding: 20px;
+            line-height: 1.5;
+        }
+        h1 { color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px; }
+        h3 { color: #555; margin-top: 25px; }
+        .form-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border: 1px solid #ddd;
+            margin: 15px 0;
+            border-radius: 3px;
+        }
+        .result-box {
+            background: #fff3cd;
+            padding: 15px;
+            border: 1px solid #ffeaa7;
+            margin: 15px 0;
+            border-radius: 3px;
+        }
+        .data-box {
+            background: #e8f5e8;
+            padding: 15px;
+            border: 1px solid #d4edda;
+            margin: 15px 0;
+            border-radius: 3px;
+        }
+        input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            width: 200px;
+            margin: 5px 10px 5px 0;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        button:hover { background: #0056b3; }
+        ul { margin: 10px 0; }
+        li { margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h1>Bai 3,4: Product Form Binding</h1>
+
+    <div class="form-box">
+        <h3>Nhap thong tin san pham:</h3>
+        <form action="/product/save" method="post">
+            <p>
+                <label><strong>Ten san pham:</strong></label><br>
+                <input name="name" th:value="${p2?.name}" placeholder="Nhap ten san pham">
+            </p>
+            <p>
+                <label><strong>Gia san pham:</strong></label><br>
+                <input name="price" th:value="${p2?.price}" type="number" step="0.01" placeholder="Nhap gia">
+            </p>
+            <button type="submit">Luu san pham</button>
+        </form>
+    </div>
+
+    <div class="result-box">
+        <h3>Du lieu mau tu Controller (p1):</h3>
+        <ul>
+            <li><strong>Ten:</strong> <span th:text="${p1?.name ?: 'Chua co du lieu'}">?1name</span></li>
+            <li><strong>Gia:</strong> <span th:text="${p1?.price ?: 'Chua co du lieu'}">?1price</span></li>
+        </ul>
+    </div>
+
+    <div th:if="${p2?.name}" class="data-box">
+        <h3>Du lieu vua luu (p2):</h3>
+        <ul>
+            <li><strong>Ten:</strong> <span th:text="${p2.name}">?2name</span></li>
+            <li><strong>Gia:</strong> <span th:text="${p2.price}">?2price</span></li>
+        </ul>
+    </div>
+
+    <div class="result-box">
+        <h3>Danh sach san pham tu @ModelAttribute:</h3>
+        <ul>
+            <li th:each="item, iterStat: ${items}" th:if="${iterStat.index < 5}">
+                <span th:text="${item.name}">item.name</span> -
+                <span th:text="${item.price}">item.price</span>
+            </li>
+        </ul>
+        <small><em>Hien thi 5 san pham dau tien...</em></small>
+    </div>
+
+    <hr style="margin: 30px 0;">
+    <a href="/" style="color: #007bff; text-decoration: none;">← Trang chu</a> |
+    <a href="/product/list" style="color: #007bff; text-decoration: none;">Danh sach phan trang →</a>
+</body>
+</html>

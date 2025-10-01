@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 2 - Spring MVC</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 15px;
+        }
+        h3 {
+            color: #007bff;
+            margin-top: 30px;
+            border-left: 4px solid #007bff;
+            padding-left: 10px;
+        }
+        p { margin: 8px 0; }
+        .bai-section {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 20px 0;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover { color: #0056b3; }
+        .summary {
+            text-align: center;
+            background: #e8f5e8;
+            padding: 15px;
+            border: 1px solid #d4edda;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lab 2 - Spring MVC Framework</h1>
+    <p style="text-align: center; color: #666;">Trang chu hien thi cac bai thuc hanh Spring MVC</p>
+
+    <div class="bai-section">
+        <h3>Bai 1 (2 diem): OK Controller</h3>
+        <p>Tao OK Controller voi 3 phuong thuc m1(), m2(), m3() xu ly POST, GET va GET voi parameter</p>
+        <a href="/ok">→ Test OK Controller</a>
+    </div>
+
+    <div class="bai-section">
+        <h3>Bai 2 (2 diem): Parameter Controller</h3>
+        <p>Demo cach su dung @PathVariable va @RequestParam de doc du lieu tu URL va form</p>
+        <a href="/param/form">→ Test Parameter Form</a>
+    </div>
+
+    <div class="bai-section">
+        <h3>Bai 3 (1 diem): Product Form</h3>
+        <p>Su dung Product class voi form binding don gian, hien thi du lieu da luu</p>
+        <a href="/product/form">→ Test Product Form</a>
+    </div>
+
+    <div class="bai-section">
+        <h3>Bai 4 (2 diem): Product Controller Nang Cao</h3>
+        <p>Su dung Model, @ModelAttribute method level de chia se du lieu giua controller va view</p>
+        <a href="/product/form">→ Product Form Nang Cao</a>
+    </div>
+
+    <div class="bai-section">
+        <h3>Bai 5 (2 diem): Result Controller</h3>
+        <p>Demo su khac biet giua Forward (Model), Redirect (RedirectAttributes) va ResponseBody</p>
+        <p>
+            <a href="/a">Trang a</a> |
+            <a href="/b">Forward</a> |
+            <a href="/c">Redirect</a> |
+            <a href="/d">ResponseBody</a>
+        </p>
+    </div>
+
+    <div class="bai-section">
+        <h3>Bai 6 (1 diem): Product List</h3>
+        <p>Hien thi 20 san pham voi phan trang, co the chon page size</p>
+        <a href="/product/list">→ Danh Sach San Pham</a>
+    </div>
+
+
+</body>
+</html>

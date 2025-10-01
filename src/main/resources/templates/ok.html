@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Bai 1 - OK Controller</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            line-height: 1.5;
+        }
+        h1 { color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px; }
+        .form-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border: 1px solid #ddd;
+            margin: 20px 0;
+            text-align: center;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            margin: 5px;
+            cursor: pointer;
+        }
+        button:hover { background: #0056b3; }
+        .result-box {
+            background: #e8f5e8;
+            padding: 15px;
+            border: 1px solid #d4edda;
+            margin: 20px 0;
+        }
+        .success { color: #28a745; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Bai 1: OK Controller - Test 3 Button Mapping</h1>
+
+    <div class="form-box">
+        <form action="/ok" method="post">
+            <button>OK 1 (POST)</button>
+            <button formmethod="get">OK 2 (GET)</button>
+            <button formaction="/ok?x">OK 3 (GET + param)</button>
+        </form>
+    </div>
+
+    <div class="result-box">
+        <h3>Ket qua:</h3>
+        <p th:if="${method}" class="success" th:text="'✓ Phuong thuc duoc goi: ' + ${method}"></p>
+        <p th:unless="${method}">Chua co button nao duoc click</p>
+    </div>
+
+    <hr>
+    <a href="/" style="color: #007bff; text-decoration: none;">← Quay ve trang chu</a>
+</body>
+</html>

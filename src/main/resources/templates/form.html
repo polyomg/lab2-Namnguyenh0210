@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Parameter Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 20px;
+            line-height: 1.5;
+        }
+        h1 { color: #333; border-bottom: 2px solid #ddd; padding-bottom: 10px; }
+        h3 { color: #555; margin-top: 25px; }
+        .form-box {
+            background: #f9f9f9;
+            padding: 15px;
+            border: 1px solid #ddd;
+            margin: 15px 0;
+        }
+        .result-box {
+            background: #f0f8ff;
+            padding: 15px;
+            border: 1px solid #cce7ff;
+            margin: 15px 0;
+        }
+        input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            width: 200px;
+            margin: 5px 0;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        button:hover { background: #0056b3; }
+        .success { color: #28a745; font-weight: bold; }
+        ul { margin: 10px 0; }
+        li { margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h1>Bai 2: Form Parameters</h1>
+
+    <div class="form-box">
+        <h3>Nhap du lieu:</h3>
+        <form action="/param/save/2021" method="post">
+            <p><strong>Path Variable (x):</strong> Gia tri co dinh = 2021</p>
+            <p><strong>Request Parameter (y):</strong>
+                <input name="y" value="2031" placeholder="Nhap gia tri y">
+            </p>
+            <button type="submit">Save</button>
+        </form>
+    </div>
+
+    <div class="result-box">
+        <h3>Ket qua nhan duoc:</h3>
+        <ul>
+            <li><strong>Path Variable (x):</strong> <span th:text="${x}">?x</span></li>
+            <li><strong>Request Parameter (y):</strong> <span th:text="${y}">?y</span></li>
+        </ul>
+
+        <div th:if="${x != null and y != null}" class="success">
+            ✓ Thanh cong! Du lieu da duoc nhan tu URL path va form parameter
+        </div>
+    </div>
+
+    <div>
+        <h3>Cach hoat dong:</h3>
+        <ul>
+            <li><strong>@PathVariable:</strong> Lay gia tri "2021" tu URL path /param/save/{x}</li>
+            <li><strong>@RequestParam:</strong> Lay gia tri tu form input co name="y"</li>
+            <li><strong>Controller:</strong> Se xu ly va tra ve cung trang voi du lieu</li>
+        </ul>
+    </div>
+
+    <hr style="margin: 30px 0;">
+    <a href="/" style="color: #007bff; text-decoration: none;">← Quay ve trang chu</a>
+</body>
+</html>

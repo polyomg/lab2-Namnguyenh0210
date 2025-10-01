@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bai 5 - Result Controller</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 20px;
+            line-height: 1.5;
+        }
+        h1 { color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px; }
+        h3 { color: #555; margin-top: 25px; }
+        .result-box {
+            background: #e8f5e8;
+            padding: 15px;
+            border: 1px solid #d4edda;
+            margin: 15px 0;
+            border-radius: 3px;
+        }
+        .forward-box {
+            background: #fff3cd;
+            padding: 15px;
+            border: 1px solid #ffeaa7;
+            margin: 15px 0;
+            border-radius: 3px;
+        }
+        .redirect-box {
+            background: #f0f8ff;
+            padding: 15px;
+            border: 1px solid #cce7ff;
+            margin: 15px 0;
+            border-radius: 3px;
+        }
+        .link-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border: 1px solid #ddd;
+            margin: 20px 0;
+            text-align: center;
+            border-radius: 3px;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            margin: 0 8px;
+            font-weight: bold;
+        }
+        a:hover { color: #0056b3; }
+        .success { color: #28a745; font-weight: bold; }
+        ul { margin: 10px 0; }
+        li { margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h1>Bai 5: Result Controller Test</h1>
+
+    <div class="result-box">
+        <h3>Ket qua hien thi:</h3>
+
+        <!-- Message tu Model (forward tu /b) -->
+        <div th:if="${message}" class="forward-box">
+            <h4>✓ Message tu Model (Forward):</h4>
+            <p class="success" th:text="${message}">Message from Model</p>
+        </div>
+
+        <!-- Message tu RedirectAttributes (redirect tu /c) -->
+        <div th:if="${param.message}" class="redirect-box">
+            <h4>✓ Message tu RedirectAttributes (Redirect):</h4>
+            <p class="success" th:text="${param.message}">Message from RedirectAttributes</p>
+        </div>
+
+        <!-- Hien thi khi khong co message nao -->
+        <div th:unless="${not #strings.isEmpty(message) || not #strings.isEmpty(param.message)}">
+            <p>Chua co message nao duoc truyen. Hay test cac link ben duoi.</p>
+        </div>
+    </div>
+
+    <div class="link-box">
+        <h3>Test cac endpoint:</h3>
+        <p>
+            <a href="/a">Trang a</a> |
+            <a href="/b">Forward voi Model</a> |
+            <a href="/c">Redirect voi RedirectAttributes</a> |
+            <a href="/d">ResponseBody truc tiep</a>
+        </p>
+    </div>
+
+    <div>
+        <h3>Cach hoat dong:</h3>
+        <ul>
+            <li><strong>/a:</strong> Hien thi trang a.html truc tiep</li>
+            <li><strong>/b:</strong> Them message vao Model va forward ve trang a</li>
+            <li><strong>/c:</strong> Them message vao RedirectAttributes va redirect ve /a</li>
+            <li><strong>/d:</strong> Tra ve String truc tiep voi @ResponseBody</li>
+        </ul>
+    </div>
+
+    <hr style="margin: 30px 0;">
+    <a href="/" style="color: #007bff; text-decoration: none;">← Quay ve trang chu</a>
+</body>
+</html>

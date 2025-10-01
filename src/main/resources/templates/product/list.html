@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            line-height: 1.5;
+        }
+        h1 { color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px; }
+        .control-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border: 1px solid #ddd;
+            margin: 20px 0;
+            border-radius: 3px;
+        }
+        .info-box {
+            background: #fff3cd;
+            padding: 10px;
+            border: 1px solid #ffeaa7;
+            margin: 15px 0;
+            border-radius: 3px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            background: white;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) { background: #f8f9fa; }
+        .pagination {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+        .pagination a, .pagination span {
+            display: inline-block;
+            padding: 8px 12px;
+            margin: 0 2px;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            color: #007bff;
+        }
+        .pagination a:hover { background: #e9ecef; }
+        .pagination span { background: #007bff; color: white; font-weight: bold; }
+        select { padding: 5px; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Bai 6: Danh sach san pham - Phan trang</h1>
+
+    <div class="control-box">
+        <form method="get">
+            <label><strong>Page Size:</strong>
+                <select name="pageSize" onchange="this.form.submit()">
+                    <option value="5" th:selected="${pageSize == 5}">5 san pham</option>
+                    <option value="10" th:selected="${pageSize == 10}">10 san pham</option>
+                    <option value="15" th:selected="${pageSize == 15}">15 san pham</option>
+                    <option value="20" th:selected="${pageSize == 20}">20 san pham</option>
+                </select>
+            </label>
+            <input type="hidden" name="pageNumber" th:value="${currentPage}">
+        </form>
+    </div>
+
+    <div class="info-box">
+        <strong>Thong tin phan trang:</strong>
+        Hien thi trang <strong th:text="${currentPage}">1</strong> / <strong th:text="${totalPages}">4</strong>
+        (Moi trang: <strong th:text="${pageSize}">5</strong> san pham)
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Ten san pham</th>
+                <th>Gia</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="product, iterStat : ${products}">
+                <td th:text="${(currentPage - 1) * pageSize + iterStat.index + 1}"></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.price}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        <!-- Nut Previous -->
+        <a th:if="${currentPage > 1}"
+           th:href="@{/product/list(pageSize=${pageSize}, pageNumber=${currentPage - 1})}">
+           ← Truoc
+        </a>
+        <span th:unless="${currentPage > 1}">← Truoc</span>
+
+        <!-- Cac so trang -->
+        <th:block th:each="pageNum : ${#numbers.sequence(1, totalPages)}">
+            <span th:if="${pageNum == currentPage}" th:text="${pageNum}"></span>
+            <a th:unless="${pageNum == currentPage}"
+               th:href="@{/product/list(pageSize=${pageSize}, pageNumber=${pageNum})}"
+               th:text="${pageNum}"></a>
+        </th:block>
+
+        <!-- Nut Next -->
+        <a th:if="${currentPage < totalPages}"
+           th:href="@{/product/list(pageSize=${pageSize}, pageNumber=${currentPage + 1})}">
+           Tiep →
+        </a>
+        <span th:unless="${currentPage < totalPages}">Tiep →</span>
+    </div>
+
+    <hr style="margin: 30px 0;">
+    <a href="/" style="color: #007bff; text-decoration: none;">← Trang chu</a> |
+    <a href="/product/form" style="color: #007bff; text-decoration: none;">Them san pham</a>
+</body>
+</html>
